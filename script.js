@@ -1,33 +1,32 @@
-var itemValue, itemPrice,unitPrice;
+ var itemValue, itemPrice,unitPrice,item1UnitPrice,item2UnitPrice;
+ item1UnitPrice = getUnitPrice("item1Price");
+ item2UnitPrice = getUnitPrice("item2Price");
 
-// unitPrice= getUnitPrice("item1Price");
-// getUnitPrice("item2Price");
 //remove item hendeler
 document.getElementById("removeItem1").addEventListener("click",function(){
-    //unitPrice= getUnitPrice(id);
+    unitPrice= item1UnitPrice;
     itemValue = updateRemoveItemValue("item1Value");
-    updateRemoveItem1Price("item1Price",itemValue);
+    updateRemoveItemPrice("item1Price",itemValue,unitPrice);
 })
 document.getElementById("removeItem2").addEventListener("click",function(){
-     //unitPrice= getUnitPrice(id);
+     unitPrice= item2UnitPrice;
      itemValue = updateRemoveItemValue("item2Value");
-     updateRemoveItem2Price("item2Price",itemValue);
+     updateRemoveItemPrice("item2Price",itemValue,unitPrice);
 })
 
 //add item hendeler
 document.getElementById("addItem1").addEventListener("click",function(){
+     unitPrice= item1UnitPrice;
      itemValue = updateAddItemValue("item1Value");
-     itemPrice= itemValue*1219
-     document.getElementById("item1Price").innerText=itemPrice;
+     itemValue = updateAddItemValue("item1Value");
+     updateAddItemPrice("item1Price",itemValue,unitPrice);
 })
 document.getElementById("addItem2").addEventListener("click",function(){
+    unitPrice= item2UnitPrice;
      itemValue = updateAddItemValue("item2Value");
-     itemPrice= itemValue*59
-     document.getElementById("item2Price").innerText=itemPrice;
+     updateAddItemPrice("item2Price",itemValue,unitPrice);
    
 })
-
-
 function updateRemoveItemValue(id){
     itemValue = document.getElementById(id).value;
     itemValue = parseInt(itemValue);
@@ -37,35 +36,19 @@ function updateRemoveItemValue(id){
    document.getElementById(id).value=itemValue;
    return itemValue;
 }
-function updateRemoveItem1Price(id,itemValue){
+function updateRemoveItemPrice(id,itemValue,unitPrice){
     itemPrice = document.getElementById(id).innerText;
     itemPrice = parseInt(itemPrice);
-   // console.log("unit price 1",unitPrice);
 
     if(itemValue==1){
-        itemPrice=1219;
+        itemPrice=unitPrice;
         document.getElementById(id).innerText=itemPrice;
     }
     if(itemValue>=2){
-        itemPrice=itemPrice-1219;
+        itemPrice=itemPrice-unitPrice;
         document.getElementById(id).innerText=itemPrice;
     }
 }
-function updateRemoveItem2Price(id,itemValue){
-    itemPrice = document.getElementById(id).innerText;
-    itemPrice = parseInt(itemPrice);
-    
-   // console.log("unit price 2",unitPrice);
-    if(itemValue==1){
-        itemPrice=59;
-        document.getElementById(id).innerText=itemPrice;
-    }
-    if(itemValue>=2){
-        itemPrice=itemPrice-59;
-        document.getElementById(id).innerText=itemPrice;
-    }
-}
-
 function updateAddItemValue(id){
     itemValue = document.getElementById(id).value;
     itemValue = parseInt(itemValue);
@@ -73,11 +56,12 @@ function updateAddItemValue(id){
     document.getElementById(id).value=itemValue;
     return itemValue;
 }
+function updateAddItemPrice(id,itemPrice,unitPrice){
+    itemPrice= itemValue*unitPrice;
+    document.getElementById(id).innerText=itemPrice;
+ }
 function getUnitPrice(id){
     itemPrice = document.getElementById(id).innerText;
     itemPrice = parseInt(itemPrice);
     return itemPrice;
-
 }
-// console.log(itemPrice);
-// console.log(typeof(itemPrice));
